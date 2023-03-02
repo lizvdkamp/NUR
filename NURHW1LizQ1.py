@@ -34,7 +34,9 @@ def Poisson(l, k):
 ks = np.array([0,10,21,40,200],dtype=np.int32)
 ls = np.array([1,5,3,2.6,101],dtype=np.float32)
 
-print(Poisson(ls, ks))
+Poisson = Poisson(ls, ks)
 
+# Save a text file
+np.savetxt('Poissonoutput.txt',np.transpose([ls,ks,Poisson]))
 
 
