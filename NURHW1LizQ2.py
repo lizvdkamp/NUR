@@ -385,6 +385,7 @@ print("Average time taken 2c:", att2c, "s")
 #LU decomposition & iteration is about a 100 times faster than Nevilles algorithm, because Nevilles algorithm already iterates over the solution to get a more accurate result. Doing the LU decomposition and iterating over the solution is faster because you do not have to recalculate the LU matrix, and for Nevilles algorithm we use bisection for every single point we want to interpolate, which adds to the time if we want to interpolate many points with a big data set and create a high order polynomial.
 
 # Save a text file
-np.savetxt('Timesoutput.txt',np.transpose([att2a,att2b,att2c]))
+np.savetxt('Timesoutput.txt',[att2a,att2b,att2c])
+
 
 
