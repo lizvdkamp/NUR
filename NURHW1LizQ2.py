@@ -6,6 +6,8 @@ import os
 
 #Question 2
 
+#I have created these functions in collaboration with my sister Evelyn van der Kamp (s2138085) during the tutorial classes
+
 #Functions to swap, scale and add rows to each other
 def SwapRow(M,i,j):
 	"""Takes a matrix M and swaps rows i and j"""
@@ -137,9 +139,11 @@ x=data[:,0]
 y=data[:,1]
 xx=np.linspace(x[0],x[-1],1001) #x values to interpolate at
 
+length = len(x)
+
 #Creating the Vandermonde matrix
-VMm = np.zeros((len(x),len(x)))
-for j in range(len(x)):
+VMm = np.zeros((length,length))
+for j in range(length):
 	VMm[:,j] = x**j
 
 #LU decomposition
@@ -150,8 +154,8 @@ np.savetxt('LU1output.txt',np.transpose([c_sol]))
 
 #Interpolated polynomial solution at 1000 points and only at the points xi
 yy = np.zeros(len(xx))
-yi = np.zeros(len(x))
-for j in range(len(x)):
+yi = np.zeros(length)
+for j in range(length):
 	yy += c_sol[j]*xx**j
 	yi += c_sol[j]*x**j
 
