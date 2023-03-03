@@ -1,0 +1,10 @@
+\section{Poisson distribution}
+
+For this question I created a function that calculates the Poisson probability distribution for a given integer $k$ and positive mean $\lambda$.
+To prevent overflow from happening due to $k!$, I implemented that for a $k > 16$ we take the natural log of the Poisson distribution, and use $\ln(k!) = sum(\ln(n))$ with $n$ from 1 to $k$, and then take the exponent of that to get the result.
+
+\lstinputlisting{NURHW1LizQ1.py}
+
+The result of the script is given by:
+
+\lstinputlisting{Poissonoutput.txt}
