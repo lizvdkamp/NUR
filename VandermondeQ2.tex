@@ -96,7 +96,7 @@ I run the functions 50 times and get the following average run times:
 \lstinputlisting{Timesoutput.txt}
 
 Here are the times in seconds, where (a) and (c) take about 0.004 s to run, and (b) 0.5 s.
-LU decomposition & iteration is about a 100 times faster than Neville's algorithm, 
+LU decomposition and iteration is about a 100 times faster than Neville's algorithm, 
 because Neville's algorithm already iterates over the solution to get a more accurate result. 
 Doing the LU decomposition and iterating over the solution is faster because you do not have to 
 recalculate the LU matrix, and for Neville's algorithm we use bisection for every single point 
