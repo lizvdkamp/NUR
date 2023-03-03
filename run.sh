@@ -19,7 +19,7 @@ python3 NURHW1LizQ2.py
 
 echo "Generating the pdf"
 
-pdflatex Solution.tex
-bibtex Solution.aux
-pdflatex Solution.tex
-pdflatex Solution.tex
+pdflatex Solutions.tex
+bibtex Solutions.aux
+pdflatex Solutions.tex
+pdflatex Solutions.tex
