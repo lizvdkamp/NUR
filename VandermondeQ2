@@ -1,0 +1,106 @@
+\section{Vandermonde matrix}
+
+In this section we look at question 2. 
+I have mostly copy-pasted my functions from the tutorials, where I worked together with my sister,
+Evelyn van der Kamp (s2138085), so our functions are quite similar.
+Also for the iterative function I copied parts from my tutorial functions. 
+We are used to coding together and so we have similar techniques.
+
+The script for the entire question is given by:
+\lstinputlisting{NURHW1LizQ2.py}
+
+\subsection{Question 2a}
+
+I have created a set of functions to do matrix operations, swapping rows, scaling rows, 
+and adding rows to other rows. I also made one function to swap vector rows.
+The function to do LU decomposition makes use of an improved version of Crouts algorithm,
+including swapping rows to make sure that the biggest number below the diagonal gets put on the diagonal.
+The function returns the LU matrix, the solution, and the index array which has information about swapped rows.
+
+I created the Vandermonde matrix and used the LU decomposition function to solve for $c$,
+and got the following output:
+
+\lstinputlisting{LU1output.txt}
+
+Afterwards I used the solution to interpolate and get the full 19th-degree polynomial evaluated at
+$\approx$ 1000 equally spaced points.
+I also used the solution to plot the absolute difference between the data points and the polynomial.
+
+The plot generated can bee seen in Figure \ref{fig:LU1}.
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.9\linewidth]{LU1plot.png}
+  \caption{Plot comparing the data points to the 19-degree polynomial obtained with LU
+  decomposition. The upper plot shows both, while the lower plot shows the absolute difference
+  between the data and the polynomial. This is between 0 and 0.25.}
+  \label{fig:LU1}
+\end{figure}
+
+\subsection{Question 2b}
+
+In this part I have used my function that uses Neville's algorithm to calculate the Lagrange polynomial
+that goes through all of the data points.
+It returns the interpolated points that forms the Lagrange polynomial.
+I used this function twice to calculate both the 1000 equally spaced points that form the polynomial
+as well as the points to calculate the absolute difference between the data and the curve.
+
+The plot generated can bee seen in Figure \ref{fig:Neville}.
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.9\linewidth]{Nevilleplot.png}
+  \caption{Plot comparing the data points to the Lagrange polynomial obtained with 
+  Neville's algorithm as well as the previously obtained polynomial. The upper plot shows the data and two curves, 
+  while the lower plot shows the absolute difference
+  between the data and the Lagrange polynomial. This is of order $10^{-14}$.}
+  \label{fig:Neville}
+\end{figure}
+
+There is a difference between the absolute differences, from 2(a) it was order 0.1 and now it is 
+order $10^{-14}$, the polynomials are different, especially at the start.
+In the solution from LU decomposition the error is higher because in Neville's algorithm 
+we already reduce the error by iterating the different solutions, and we get almost the exact
+Lagrange polynomial.
+
+\subsection{Question 2c}
+
+Here I have created a function to iterate over the solution obtained in 2(a) from the LU decomposition.
+It calculates the error on the solution by taking $\delta b = A*x - b$ and then solving for 
+$A*\delta x = \delta b$ as many times as I give the function.
+For this question we iterate over the solution 10 times to obtain a new and improved solution.
+
+The plot generated can bee seen in Figure \ref{fig:LU10}.
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.9\linewidth]{LU10plot.png}
+  \caption{Plot comparing the data points to the two curves obtained with LU decomposition.
+  LU1 is the initial solution, LU10 shows the solution after iterating 10 times.
+  The upper plot shows the data and two curves, 
+  while the lower plot shows the absolute difference
+  between the data and the ten iterations LU solution. 
+  This around 0 for the first couple of points and of order 0.1
+  for the last three points.}
+  \label{fig:LU10}
+\end{figure}
+
+The solution after 10 iterations is closer to the Neville algorithm solution, 
+and the error is a lot lower except for the last points.
+
+\subsection{Question 2d}
+
+Here I use \texttt{time.it} to time how long it takes to execute the functions from (a), (b), and (c).
+I run the functions 50 times and get the following average run times:
+
+\lstinputlisting{Timesoutput.txt}
+
+Here are the times in seconds, where (a) and (c) take about 0.004 s to run, and (b) 0.5 s.
+LU decomposition & iteration is about a 100 times faster than Neville's algorithm, 
+because Neville's algorithm already iterates over the solution to get a more accurate result. 
+Doing the LU decomposition and iterating over the solution is faster because you do not have to 
+recalculate the LU matrix, and for Neville's algorithm we use bisection for every single point 
+we want to interpolate, which adds to the time if we want to interpolate many points with a 
+big data set and create a high order polynomial.
+
+
